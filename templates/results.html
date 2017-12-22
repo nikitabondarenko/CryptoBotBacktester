@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" type = "text/css" href="{{ url_for('static',filename='styles/style.css') }}">
+</head>
+<h1>
+  CryptoBot Parameter Tester — Results
+</h1>
+
+<div id="res"></div>
+
+<div style="margin:0px auto; background-color:#FFF; font-size:18px; font-family:Tahoma, Geneva, sans-serif; border:2px solid #999; display: flex; flex: 1; justify-content: center; align-items: center; flex-direction: column;">
+<div id = "inside"></div>
+<div style="text-align: center"
+<div>
+<h2>
+  Start value = {{initValue}} BTC<br />
+  Final value = {{fv}} BTC
+</h2>
+</div>
+<p>
+  sma interval = {{lags}}, cutoff = {{cutoff}}, tilt = {{tilt}}<br />
+  final base amount = {{fba}}
+  final quote amount = {{fqa}}<br />
+  Sharpe Ratio = {{SR}}<br />
+  number of buys = {{nB}}, number of sells = {{nS}}<br />
+  Backtest time: {{btT}}<br />
+</p>
+<div class = "graphs">
+  <img src="/graphs?start={{initValue}}&length={{lags}}&cutoff={{cutoff}}&tilt={{tilt}}">
+</div>
+</div>
