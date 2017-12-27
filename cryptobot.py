@@ -17,10 +17,7 @@ from matplotlib.dates import DateFormatter
 df = pd.read_csv("BE.csv", sep=",")  
 
 def backtest(df, lags, cutoff, initValue, tilt):
-    lags = int(lags)
-    cutoff = float(cutoff)
-    initValue = int(initValue)
-    tilt = float(tilt)
+
     df = df.reset_index(drop=True)
     Price = df.Close
     Tc = df.Tc
@@ -83,10 +80,10 @@ def inputPage():
 
 @app.route("/graphs")
 def images():
-    initValue = request.args.get('start')
-    lags = request.args.get('length')
-    cutoff = request.args.get('cutoff')
-    tilt = request.args.get('tilt')
+    initValue = int(request.args.get('start'))
+    lags = int(request.args.get('length'))
+    cutoff = float(request.args.get('cutoff'))
+    tilt = float(request.args.get('tilt'))
     print(initValue, lags, cutoff, tilt)
     print(df)
     results = backtest(df[100:], lags, cutoff, initValue, tilt )
@@ -100,10 +97,20 @@ def images():
 
 @app.route('/', methods = ['POST'])
 def results():
-    initValue = request.form['start']
-    lags = request.form['length']
-    cutoff = request.form['cutoff']
-    tilt = request.form['tilt']
+    if (len(request.form['start'])==0 or len(request.form['length'])==0 or len(request.form['cutoff'])==0 or len(request.form['tilt'])==0):
+        return render_template('error.html', message = "One or more input fields is empty")
+    initValue = int(request.form['start'])
+    lags = int(request.form['length'])
+    cutoff = float(request.form['cutoff'])
+    tilt = float(request.form['tilt'])
+    if (initValue<=0):
+        return render_template('error.html', message = "Starting Capital Amount must be greater than 0")
+    if (lags<=0):
+        return render_template('error.html', message = "SMA Length must be greater than 0 minutes")
+    if (cutoff<=0 or cutoff >= 1.0):
+        return render_template('error.html', message = "Percentage Cutoff must be between 0.00-1.00")
+    if (tilt<=0 or tilt >= 1.0):
+        return render_template('error.html', message = "Tilt must be between 0.00-1.00")
     print(initValue, lags, cutoff, tilt)
     print(df)
     results = backtest(df[100:], lags, cutoff, initValue, tilt )
@@ -114,7 +121,7 @@ def results():
     nB = results[4]
     nS = results[5]
     btT = results[6]
-    return render_template('results.html', initValue = initValue, lags = lags, cutoff = cutoff, tilt = tilt, fba = fba, fqa = fqa, fv = fv, SR = SR, nB = nB, nS = nS, btT = btT)
+    return render_template('results.html', initValue = initValue, lags = lags, cutoff = cutoff, tilt = tilt, fba = "%0.4f" % fba, fqa = "%0.4f" % fqa, fv = "%0.4f" % fv, SR = "%0.4f" % SR, nB = nB, nS = nS, btT = "%0.4f" % btT)
 
 #https://stackoverflow.com/questions/20107414/passing-a-matplotlib-figure-to-html-flask
     
