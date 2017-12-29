@@ -1,9 +1,15 @@
+
 h1 {
   font: 3em/1.5 sans-serif;
   text-align: center; }
 
 body {
   background-color:#F8F8F8;
+}
+h2 {
+  font-size:16px;
+  font-weight:bold;
+  font-family:Tahoma, Geneva, sans-serif;
 }
 
 #res {
@@ -17,4 +23,18 @@ body {
   padding-top:9px;
   border:2px solid #999;
   border-bottom:0;
+}
+
+
+.graphs {
+    display: flex;
+    flex: 1;
+    /* width: 100%; */
+    justify-content: center;
+    align-items: center;
+}
+
+.graphs img {
+    margin: 0 5px;
+    object-fit: contain;
 }

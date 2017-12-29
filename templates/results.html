@@ -19,14 +19,17 @@
 </h2>
 </div>
 <p>
-  sma interval = {{lags}}, cutoff = {{cutoff}}, tilt = {{tilt}}<br />
-  final base amount = {{fba}}
-  final quote amount = {{fqa}}<br />
+  MA type: {{stratype}} <br />
+  Redistribution Frequency (Hours)= {{lags}}, cutoff = {{cutoff}}, tilt = {{tilt}}<br />
   Sharpe Ratio = {{SR}}<br />
+  Final value EW = {{fvEW}} <br />
+  Sharpe Ratio EW = {{srEW}} <br />
   number of buys = {{nB}}, number of sells = {{nS}}<br />
   Backtest time: {{btT}}<br />
+  Final base amount: <br />
+  Final quote amount: <br />
 </p>
 <div class = "graphs">
-  <img src="/graphs?start={{initValue}}&length={{lags}}&cutoff={{cutoff}}&tilt={{tilt}}">
+  <img src="/graphs?start={{initValue}}&length={{lags}}&cutoff={{cutoff}}&tilt={{tilt}}&stratype={{stratype}}">
 </div>
 </div>
