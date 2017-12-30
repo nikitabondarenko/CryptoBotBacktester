@@ -99,7 +99,7 @@ def images():
     if (stratype=='Contrarian'):
         momentum = -1
     print(momentum)
-    results = backtest(df[100:], lags*60, cutoff, initValue, tilt, momentum)
+    results = backtest(df[100:], lags*60, cutoff/100, initValue, tilt/100, momentum)
     image = results[7]
     canvas=FigureCanvas(image)
     png_output = BytesIO()
@@ -126,12 +126,12 @@ def results():
         return render_template('error.html', message = "Starting Capital Amount must be greater than 0")
     if (lags<=0):
         return render_template('error.html', message = "SMA Length must be greater than 0 minutes")
-    if (cutoff<=0 or cutoff >= 1.0):
+    if (cutoff<=0 or cutoff >= 100):
         return render_template('error.html', message = "Percentage Cutoff must be between 0.00-1.00")
-    if (tilt<=0 or tilt >= 1.0):
+    if (tilt<=0 or tilt >= 100):
         return render_template('error.html', message = "Tilt must be between 0.00-1.00")
     print(initValue, lags, cutoff, tilt)
-    results = backtest(df[100:], lags*60, cutoff, initValue, tilt, momentum)
+    results = backtest(df[100:], lags*60, cutoff/100, initValue, tilt/100, momentum)
     #return [fvEW, SREW, fv, SR, nB, nS, timeBT, fig]
     fvEW = results[0]
     SREW = results[1]
