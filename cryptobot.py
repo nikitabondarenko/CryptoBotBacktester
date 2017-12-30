@@ -77,6 +77,9 @@ def SharpeRatio(Value,lags):
     Return = np.diff(np.log(Value))
     return np.mean(Return)/np.std(Return)*np.sqrt(60*24*365/lags)
 
+@app.route("/about")
+def about():
+    return render_template('about.html')
 
 @app.route("/")
 def inputPage():
