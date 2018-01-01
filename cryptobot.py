@@ -130,9 +130,9 @@ def results():
     if (lags<=0):
         return render_template('error.html', message = "SMA Length must be greater than 0 minutes")
     if (cutoff<=0 or cutoff >= 100):
-        return render_template('error.html', message = "Percentage Cutoff must be between 0.00-1.00")
-    if (tilt<=0 or tilt >= 100):
-        return render_template('error.html', message = "Tilt must be between 0.00-1.00")
+        return render_template('error.html', message = "Percentage Cutoff must be between 0-100")
+    if (tilt<=0 or tilt > 50):
+        return render_template('error.html', message = "Percent Exchanged must be between 0-50")
     print(initValue, lags, cutoff, tilt)
     results = backtest(df[100:], lags*60, cutoff/100, initValue, tilt/100, momentum)
     #return [fvEW, SREW, fv, SR, nB, nS, timeBT, fig]

@@ -10,7 +10,6 @@ body {
   background-blend-mode: overlay;
   background-position: center;
   background-size: cover;
-  text-align: center;
 }
 
 h1 {
@@ -33,82 +32,22 @@ p {
   padding: 0;
   color: whitesmoke;
   font-family: OpenSans;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 300;
   line-height: 22px;
 }
-
-.square {
-  height: 60px;
-  width: 60px;
-  border: 1px dashed white;
-  margin: 0 0 0 55px;
-  /*   padding: 1px; resize squares */
-  background-color: rgba(255, 255, 255, 0.2);
-  display: inline-block;
-  transform: rotateZ(44deg);
+p2 {
+  max-width: 700px;
+  min-height: 200px;
+  padding: 0;
+  color: whitesmoke;
+  font-family: OpenSans;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 22px;
+  text-align: center;
 }
 
-.square:hover {
-  background-color: rgba(27, 182, 239, 0.2);
-  transition: ease 0.2s;
-  cursor: pointer;
-}
-
-.square .icons {
-  position: absolute;
-  transform: rotateZ(-44deg);
-  margin: 20px 0 0px 21px;
-}
-
-.fa-facebook,
-.fa-twitter,
-.fa-dribbbler,
-.fa-youtube,
-.fa-dribbble {
-  width: 11px;
-  height: 22px;
-  color: white;
-  font-family: FontAwesome;
-  font-size: 23px;
-  font-weight: 400;
-  text-transform: uppercase;
-}
-
-.square:hover .fa-facebook {
-  color: rgba(59, 89, 152, 1)
-}
-
-.square:hover .fa-twitter {
-  color: rgba(27, 182, 239, 1)
-}
-
-.square:hover .fa-dribbble {
-  color: rgba(199, 59, 111, 1)
-}
-
-.square:hover .fa-youtube {
-  color: rgba(229, 45, 39, 1)
-}
-.logo{
-   margin: 1em;
-   position: fixed;
-   bottom: -72px;
-   z-index: 99999999999;
-   right: 0;
-}
-svg{
-
-
-
-}
-.pen{
-  fill:black;
- animation:rotateInDownLeft 3s forwards;
-}
-.all{
-  animation:rotateOut 3s forwards;
-}
 @keyframes rotateInDownLeft {
   from {
     transform-origin: left bottom;
