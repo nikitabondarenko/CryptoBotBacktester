@@ -4,33 +4,35 @@
   <link rel="stylesheet" type = "text/css" href="{{ url_for('static',filename='about.css') }}">
 </head>
 <h1>
-  ABOUT
+  About
 <br>
-<img src="https://image.ibb.co/nk616F/Layer_1_copy_21.png" width="47" height="11" align="center">
 </h1>
 <div>
   <h2>  Welcome to the CryptoBot Back-tester!</br> </h2>
-<p2>This application allows users to test how different <a href="https://www.investopedia.com/terms/m/movingaverage.asp" target="_blank"> Moving Average (MA) </a> strategies would have performed on the BTC-ETH Trading Pair Market by changing parameters.</br></p2>
+Change parameters to test how different <a href="https://www.investopedia.com/terms/m/movingaverage.asp" target="_blank"> Moving Average (MA) </a> strategies perform on the BTC-ETH Trading Pair Market</br>
 <p>
-<b>Parameters: </b></br>
-First pick if you would like to use a <a href="https://www.investopedia.com/terms/m/momentum.asp" target="_blank"> Momentum </a> or <a href="https://www.investopedia.com/terms/c/contrarian.asp" target="_blank">  Contrarian </a> <b>Indicator</b></br>
+<font size="5"><b>Parameters: </b></br></font>
+<b>Indicator</b> Which strategy the Bot will use, either a <a href="https://www.investopedia.com/terms/m/momentum.asp" target="_blank"> Momentum </a> or <a href="https://www.investopedia.com/terms/c/contrarian.asp" target="_blank">  Contrarian </a> </br>
 <b>Redistribution Frequency:</b> In general, the bot makes sure 50% of your total value remains in your the base currency (BTC) while the other 50% is stored in the quote currency (ETH). This 50-50 position, where your money is equally divided, is known as the Neutral State. The relative price is always changing so the Bot redistributes your money periodically based on the Redistribution Frequency the user specifies in hours. If during this check the price exceeds the MA by a certain amount, a trade occurs. Instead of redistributing the money evenly, the Bot places a majority of the funds into one of the currencies.</br>
 <b>Percent Cutoff:</b> This parameter lets the Bot know by what percentage the pair price must deviate from the MA in order to trigger a trade</br>
 <b>Percent Exchanged:</b> Whenever the closing price of BTC-ETH deviates the provided percentage from the MA, the Bot places a majority of the funds into one of the currencies instead of keeping the funds in a Neutral State. The percent exchanged must be between 0-50%. Indicating a 50% move means that your entire funds will be </br>
 <b>Starting Capital Amount:</b> The initial capital which is provided to the Bot in BTC because that is the base currency </br>
 </br>
-<b>Baselines:</b> </br>
-Ways to assess how well the Bot performed with given inputs</br>
+<font size="5"><b>Baselines:</b></br></font>
+Ways to assess how well the Bot performed with given User inputs</br>
 <b>Hold:</b> In this strategy no trades or redistributions occur and your funds always equal the Starting Capital Amount</br>
-<b>EW:</b> In this strategy the Bot maintains your funds in the 50-50 Neutral state. Ideally the EW strategy beats the Holding strategy</br>
-<b>EW with Active MA:</b> In this strategy the Bot maintains generally maintains funds in the 50-50 Neutral state and unless the relative BTC-ETH prices deviates from the MA in which case the Bot places a majority of the funds into one currency. Ideally the EW with MA strategy builds the EW strategy.</br>
+<b>Equal Weight (EW):</b> In this strategy the Bot maintains your funds in the 50-50 Neutral state. Ideally the EW strategy beats the Holding strategy</br>
+<b>EW with Active MA:</b> In this strategy the Bot maintains generally maintains funds in the 50-50 Neutral state and unless the relative BTC-ETH prices deviates from the MA in which case the Bot places a majority of the funds into one currency. Ideally the EW with MA strategy builds the EW strategy. Usually, if a EW stategy with monentum MA performs better than just the EW strategy, then a EW strategy with contrarian MA will perform worse and vice versa</br>
 <b>Sharpe Ratio:</b> <a href="https://www.investopedia.com/terms/s/sharperatio.asp" target="_blank">Risk-adjusted return</a> measured for both the EW and EW with MA strategy </br>
 </br>
 </br></p>
-<p2>See how well you can do! So far the best parameters have been able to increase Starting Capital of 1 BTC into over 10</p2>
+Try out the application yourself and see how well you can do! So far, we have found parameters able to increase Starting Capital of 1 BTC into over 10
 </br>
-</br>
-<p2>Data pulled from Bittrex using their API</br></p2>
-<p2>Application created by <a href="https://github.com/nikitabondarenko/" target="_blank">Nikita Bondarenko</a> </br></p2>
-</div>
 <button onclick="location.href = '/';" id="backToHome" class="float-left submit-button" >Get Started!</button>
+</br>
+</br>
+<div style="text-align:center;">
+Data pulled from Bittrex using their API</br>
+Application created by <a href="https://github.com/nikitabondarenko/" target="_blank">Nikita Bondarenko</a> </br>
+</div>
+</div>

@@ -1,80 +1,24 @@
-@import url('https://fonts.googleapis.com/css?family=Exo+2:700');
-* {
-  margin: 0 auto;
-  padding: 0;
-}
-
 body {
-  background: url("https://www.mojix.com/wp-content/uploads/2017/08/blockchain08.jpg");
-  background-color: #212121;
+  background: url("https://i.ytimg.com/vi/d5CAer2LhmM/maxresdefault.jpg");
+  background-color: #F8F8F8;
   background-blend-mode: overlay;
   background-position: center;
   background-size: cover;
 }
 
+
 h1 {
-  color: whitesmoke;
-  font-family: 'Exo 2', sans-serif;
-  font-size: 46px;
-  font-weight: 900;
-}
-h2 {
-  color: whitesmoke;
-  font-family: 'Exo 2', sans-serif;
-  font-size: 30px;
-  font-weight: 900;
-}
-
-
-p {
-  max-width: 700px;
-  min-height: 200px;
-  padding: 0;
-  color: whitesmoke;
-  font-family: OpenSans;
-  font-size: 15px;
-  font-weight: 300;
-  line-height: 22px;
-}
-p2 {
-  max-width: 700px;
-  min-height: 200px;
-  padding: 0;
-  color: whitesmoke;
-  font-family: OpenSans;
-  font-size: 15px;
-  font-weight: 300;
-  line-height: 22px;
+  font: 3em/1.5 sans-serif;
   text-align: center;
 }
 
-@keyframes rotateInDownLeft {
-  from {
-    transform-origin: left bottom;
-    transform: rotate3d(0,0,0, 0deg);
-    opacity: 1;
-  }
 
-  to {
-    -webkit-transform-origin: left bottom;
-    transform-origin: left bottom;
- transform: ;
- transform:translateX(850px) translateY(-83px) rotate3d(0,0,1, -60deg);
-    opacity: 1;
+  h2 {
+    font-size:24px;
+    font-weight:bold;
+    font-family:Tahoma, Geneva, sans-serif;
+    text-align: center;
   }
-}
-@keyframes rotateOut {
-  from {
-    -webkit-transform-origin: center;
-    transform-origin: center;
-    opacity: 1;
+  p1 {
+    font-size: 16;
   }
-
-  to {
-    -webkit-transform-origin: center;
-    transform-origin: center;
-    -webkit-transform: rotate3d(0, 0, 1, 90deg);
-    transform: rotate3d(0, 0, 1, 90deg);
-    opacity: 1;
-  }
-}
