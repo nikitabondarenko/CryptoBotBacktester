@@ -17,7 +17,6 @@ from matplotlib.dates import DateFormatter
 df = pd.read_csv("BE.csv", sep=",")  
 
 def backtest(df, lags, cutoff, initValue, tilt, momentum):
-
     df = df.reset_index(drop=True)
     Price = df.Close
     Tc = df.Tc
@@ -42,36 +41,55 @@ def backtest(df, lags, cutoff, initValue, tilt, momentum):
         if (MADt[i] > cutoff):             cPos = 1
         elif (MADt[i] < -cutoff):          cPos = -1
         else: cPos = 0  
-        Position[i] = cPos*momentum        
-       
-    t1 = time.clock()
-    SR = SharpeRatio(Value,lags)
-    SREW = SharpeRatio(ValueEW,lags)     
-    print('Frequency = %d min, cutoff = %g, starting value = %g, tilt = %g' %(lags, cutoff, 1, tilt))
-    #print('final base amount = %g, final quote amount = %g' %(aBase,aQuote))
-    fv = Value[-1]
-    print('Final value = %g, Sharpe Ratio = %g' %(Value[-1],SR))
-    fvEW = ValueEW[-1]
+        Position[i] = cPos*momentum              
     
-    print('Final value EW = %g, Sharpe Ratio EW = %g' %(fvEW,SREW))
-    nB = (Position==1).sum()
-    nS = (Position==-1).sum()
-    print('Number of buys = %d, number of sells = %d' %(nB, nS))
+    # print results
+    t1 = time.clock()
+    FinalValue = Value[-1]
+    SR = SharpeRatio(Value,lags)
+    res = [FinalValue,SR,FinalValue*0.5,FinalValue*0.5/Pricet[-1],(Position==1).sum(), (Position==-1).sum()]
+    FinalValueEW = ValueEW[-1]
+    SREW = SharpeRatio(ValueEW,lags)  
+    resEW = [FinalValueEW,SREW,FinalValueEW*0.5,FinalValueEW*0.5/Pricet[-1]]   
+    baseMT = res[2]
+    quoteMT = res[3]
+    baseEW = resEW[2]
+    quoteEW = resEW[3]
+    nB = res[4]
+    nS = res[5]
     timeBT = (t1-t0)
-    print('Backtest time: %g' % timeBT)  
+          
+    print('Parameters: Frequency = %d min, cutoff = %g, starting value = %g, tilt = %g' %(lags, cutoff, 1, tilt))
+    #print('final base amount = %g, final quote amount = %g' %(aBase,aQuote))
+    print('MT: Final Value = %.2f, Sharpe Ratio = %.2f, Base Amount = %.2f, Quote Amount = %.2f' %(res[0],res[1],res[2],res[3]))
+    print('EW: Final Value = %.2f, Sharpe Ratio = %.2f, Base Amount = %.2f, Quote Amount = %.2f' %(resEW[0],resEW[1],resEW[2],resEW[3]))
+    print('Number of buys = %d, number of sells = %d' %(res[4],res[5]))
+    print('Backtest time: %.3f sec' % (t1-t0))  
     print('  ')    
-    fig = plt.figure(figsize=(10,6))
-    ax = fig.add_subplot(222); ax.plot(Tt,MADt); ax.grid();  ax.set_title('Price-to-SMA deviation');
-    ax.axhline(y=cutoff,c="red",linewidth=0.5,zorder=0)
-    ax.axhline(y=-cutoff,c="red",linewidth=0.5,zorder=0)
-    ax = fig.add_subplot(221); ax.plot(Tc,Price/Price[0]); ax.grid();  ax.set_title('Currency Cumulative Return');
-    ax = fig.add_subplot(223); ax.plot(Tt,Value,Tt,ValueEW); ax.grid();  ax.set_title('Account Value: Active vs EW');
-    ax = fig.add_subplot(224); ax.plot(Tt,Position,'.');   ax.grid();  ax.set_title('Buys (+1), Holds (0), and Sells (-1)');    
+        
+    # plot results
+    fig = plt.figure(figsize=(10,6))    
+    ax = fig.add_subplot(221); ax.plot(Tc,Price/Price[0]); ax.grid();  
+    ax.set_title('Currency Cumulative Return');    
+    ax = fig.add_subplot(222); ax.plot(Tt,MADt); ax.grid();  
+    ax.set_title('Price-to-SMA deviation');
+    ax.axhline(y=cutoff,c='r',zorder=0);     ax.axhline(y=-cutoff,c='r',zorder=0)    
+    ax = fig.add_subplot(223); 
+    ax.plot(Tt,Value*0+1,label='BH'); 
+    ax.plot(Tt,ValueEW,label='EW'); 
+    ax.plot(Tt,Value,label='MT'); 
+    ax.grid();  ax.set_title('Account Value');      plt.legend()    
+    ax = fig.add_subplot(224)        
+    weightQuote = 0.5 + Position*tilt       
+    ax.plot(Tt,weightQuote,'.');   
+    ax.grid();   ax.set_title('Weight in Quote');    plt.legend()    
     #return (Value[-1], (Position==1).sum(), (Position==-1).sum(), SR, SREW) 
     #return (aBase, aQuote, cValue, Position.count(1), Position.count(-1), SR)
     
+    #res = [FinalValue,SR,FinalValue*0.5,FinalValue*0.5/Pricet[-1],(Position==1).sum(), (Position==-1).sum()]
+    #resEW = [FinalValueEW,SREW,FinalValueEW*0.5,FinalValueEW*0.5/Pricet[-1]] 
     
-    return [fvEW, SREW, fv, SR, nB, nS, timeBT, fig]
+    return [FinalValueEW, SREW, FinalValue, SR, nB, nS, timeBT, baseMT, quoteMT, baseEW, quoteEW, fig]
 
 def SharpeRatio(Value,lags):
     Return = np.diff(np.log(Value))
@@ -103,7 +121,7 @@ def images():
         momentum = -1
     print(momentum)
     results = backtest(df[100:], lags*60, cutoff/100, initValue, tilt/100, momentum)
-    image = results[7]
+    image = results[11]
     canvas=FigureCanvas(image)
     png_output = BytesIO()
     canvas.print_png(png_output)
@@ -143,7 +161,11 @@ def results():
     nB = results[4]
     nS = results[5]
     btT = results[6]
-    return render_template('results.html', stratype = stratype, initValue = initValue, lags = lags, cutoff = cutoff, tilt = tilt, fv = "%0.2f" % fv, SR = "%0.3f" % SR, nB = nB, nS = nS, fvEW = "%0.3f" %  fvEW, srEW = "%0.3f" % SREW, btT = "%0.3f" % btT)
+    baseMT = results[7]
+    quoteMT = results[8]
+    baseEW = results[9]
+    quoteEW = results[10]
+    return render_template('results.html', stratype = stratype, initValue = initValue, lags = lags, cutoff = cutoff, tilt = tilt, fv = "%0.2f" % fv, SR = "%0.3f" % SR, nB = nB, nS = nS, fvEW = "%0.3f" %  fvEW, srEW = "%0.3f" % SREW, btT = "%0.3f" % btT, baseMT = "%0.3f" % baseMT, quoteMT = "%0.3f" % quoteMT, baseEW = "%0.3f" % baseEW, quoteEW = "%0.3f" % quoteEW)
 
 #https://stackoverflow.com/questions/20107414/passing-a-matplotlib-figure-to-html-flask
     

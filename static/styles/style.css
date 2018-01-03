@@ -42,3 +42,22 @@ h2 {
     margin: 0 5px;
     object-fit: contain;
 }
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+}
+
+td{
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+th {
+    border: 1px solid #dddddd;
+    text-align: center;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}

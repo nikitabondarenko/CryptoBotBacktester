@@ -9,22 +9,24 @@
 </h1>
 <div>
   <h2>  Welcome to the CryptoBot Back-tester!</br> </h2>
-Change parameters to test how different <a href="https://www.investopedia.com/terms/m/movingaverage.asp" target="_blank"> Moving Average (MA) </a> strategies perform on the BTC-ETH Trading Pair Market</br>
+Change parameters to test how different <a href="https://www.investopedia.com/terms/m/movingaverage.asp" target="_blank"> Moving Average (MA) </a> strategies perform on the BTC-ETH Trading Pair Market.
+This application, displays the results of Buy and Hold, Equal Weight, and Market Timing strategies based on selected User Inputs.
+The Buy and Hold Strategy only requires the Starting Capital Amount parameter (usually set at 1 BTC) while the Equal Weight strategy also needs the Rebelancing Frequency parameter.
+Finally the Market Timing Strategy uses every parameter. More thorough explanations can be found below.</br>
 <p>
 <font size="5"><b>Parameters: </b></br></font>
 <b>Indicator</b> Which strategy the Bot will use, either a <a href="https://www.investopedia.com/terms/m/momentum.asp" target="_blank"> Momentum </a> or <a href="https://www.investopedia.com/terms/c/contrarian.asp" target="_blank">  Contrarian </a> </br>
-<b>Redistribution Frequency:</b> In general, the bot makes sure 50% of your total value remains in your the base currency (BTC) while the other 50% is stored in the quote currency (ETH). This 50-50 position, where your money is equally divided, is known as the Neutral State. The relative price is always changing so the Bot redistributes your money periodically based on the Redistribution Frequency the user specifies in hours. If during this check the price exceeds the MA by a certain amount, a trade occurs. Instead of redistributing the money evenly, the Bot places a majority of the funds into one of the currencies.</br>
-<b>Percent Cutoff:</b> This parameter lets the Bot know by what percentage the pair price must deviate from the MA in order to trigger a trade</br>
-<b>Percent Exchanged:</b> Whenever the closing price of BTC-ETH deviates the provided percentage from the MA, the Bot places a majority of the funds into one of the currencies instead of keeping the funds in a Neutral State. The percent exchanged must be between 0-50%. Indicating a 50% move means that your entire funds will be </br>
+<b>Rebalancing Frequency:</b> In general, the Bot makes sure 50% of the funds remain as the base currency (BTC) while the other 50% is stored as the quote currency (ETH). This 50-50 position, the capital is equally divided, is known as the Neutral State. The relative price is always changing so the Bot rebalances the money periodically based on the Rebalancing Frequency the user specifies in hours. In the Market Timing Strategy, if the price exceeds the MA by a certain amount during a check, a trade occurs. Instead of rebalancing the money evenly, the Bot places a majority of the funds into one of the currencies.</br>
+<b>Percent Cutoff:</b> This parameter controls by what percentage the pair price must deviate from the MA in order to trigger a trade</br>
+<b>Percent Exchanged:</b> Whenever the closing price of BTC-ETH deviates the provided percentage from the MA, the Bot places a majority of the funds into one of the currencies instead of keeping the funds in a Neutral State. The percent exchanged must be between 0-50%. Indicating a 50% move means that all of the funds will be placed into the majority currency </br>
 <b>Starting Capital Amount:</b> The initial capital which is provided to the Bot in BTC because that is the base currency </br>
 </br>
 <font size="5"><b>Baselines:</b></br></font>
 Ways to assess how well the Bot performed with given User inputs</br>
-<b>Hold:</b> In this strategy no trades or redistributions occur and your funds always equal the Starting Capital Amount</br>
-<b>Equal Weight (EW):</b> In this strategy the Bot maintains your funds in the 50-50 Neutral state. Ideally the EW strategy beats the Holding strategy</br>
-<b>EW with Active MA:</b> In this strategy the Bot maintains generally maintains funds in the 50-50 Neutral state and unless the relative BTC-ETH prices deviates from the MA in which case the Bot places a majority of the funds into one currency. Ideally the EW with MA strategy builds the EW strategy. Usually, if a EW stategy with monentum MA performs better than just the EW strategy, then a EW strategy with contrarian MA will perform worse and vice versa</br>
-<b>Sharpe Ratio:</b> <a href="https://www.investopedia.com/terms/s/sharperatio.asp" target="_blank">Risk-adjusted return</a> measured for both the EW and EW with MA strategy </br>
-</br>
+<b>Buy and Hold (BH):</b> In this strategy no trades or rebalancing occur so the Final Value Amount always equal the Starting Capital Amount</br>
+<b>Equal Weight (EW):</b> In this strategy the Bot maintains funds in the 50-50 Neutral state. EW takes advantage of <a href = "https://www.investopedia.com/terms/d/diversification.asp" target="_blank">diversification </a></br>
+<b>Market Timing (MT):</b> In this strategy the Bot maintains generally maintains funds in the 50-50 Neutral state and unless the relative BTC-ETH prices deviates from the MA in which case the Bot places a majority of the funds into one currency. Ideally the MT strategy beats Both the BH and EW strategies. Usually, if the MT strategy uses a monentum MA and performs better than the EW strategy, then a MT strategy with contrarian MA will perform worse and vice versa</br>
+<b>Sharpe Ratio:</b> <a href="https://www.investopedia.com/terms/s/sharperatio.asp" target="_blank">Risk-adjusted return</a> measured for Both the EW and EW with MA strategy </br>
 </br></p>
 Try out the application yourself and see how well you can do! So far, we have found parameters able to increase Starting Capital of 1 BTC into over 10
 </br>
@@ -32,7 +34,7 @@ Try out the application yourself and see how well you can do! So far, we have fo
 </br>
 </br>
 <div style="text-align:center;">
-Data pulled from Bittrex using their API</br>
+Tick Data pulled from Bittrex API</br>
 Application created by <a href="https://github.com/nikitabondarenko/" target="_blank">Nikita Bondarenko</a> </br>
 </div>
 </div>

@@ -4,7 +4,7 @@
   <link rel="stylesheet" type = "text/css" href="{{ url_for('static',filename='styles/style.css') }}">
 </head>
 <h1>
-  CryptoBot Parameter Tester — Results
+  Results
 </h1>
 
 <div id="res"></div>
@@ -20,20 +20,78 @@
 </div>
 <p>
   <b>Parameters: </b> <br />
-  MA Indicator: {{stratype}},
-    Redistribution Frequency = {{lags}} Hours <br />
-    Percent Cutoff = {{cutoff}}%, Percent Exchanged = {{tilt}}%<br />
+  </p>
+    <table>
+    <tr>
+    	<th>MA Indicator</th>
+      <th>Redistribution Frequency</th>
+      <th>Percent Cutoff</th>
+      <th>Percent Exchanged</th>
+    </tr>
+    <tr>
+    	<td>{{stratype}}</td>
+      <td>{{lags}} Hours</td>
+      <td>{{cutoff}}%</td>
+      <td>{{tilt}}%</td>
+    </tr>
+  </table>
+  <br/>
+  <p>
   <b>Results: </b><br />
-  <i> Holding Strategy</i> <br/>
-  Final value = {{initValue}}.000, Sharpe Ratio = 0.000 <br /><br />
-  <i>Equal Weight (EW) Strategy</i><br />
-  Final value = {{fvEW}}, Sharpe Ratio = {{srEW}} <br /><br />
-  <i>Equal Weight with Active Moving Average Strategy</i> <br />
-  Final value = {{fv}} BTC, Sharpe Ratio = {{SR}}<br />
-
-  number of buys = {{nB}}, number of sells = {{nS}}<br />
-  Final base amount: , Final quote amount: <br /><br />
-  Backtest time: {{btT}}<br />
+</p>
+  <table>
+  <tr>
+  	<th></th>
+    <th>Buy and Hold</th>
+    <th>Equal Weight</th>
+    <th>Market Timing</th>
+  </tr>
+  <tr>
+  	<td>Start Value (BTC)</td>
+    <td>{{initValue}}.000</td>
+    <td>{{initValue}}.000</td>
+    <td>{{initValue}}.000</td>
+  </tr>
+  <tr>
+    <td>Final Cumulative Return (BTC)</td>
+    <td>{{initValue}}.000</td>
+    <td>{{fvEW}}</td>
+    <td>{{fv}}</td>
+  </tr>
+  <tr>
+    <td>Sharpe Ratio</td>
+    <td>0.000</td>
+    <td>{{srEW}}</td>
+    <td>{{SR}}</td>
+  </tr>
+  <tr>
+    <td>Final Base Amount (BTC)</td>
+    <td>1.000</td>
+    <td>{{baseEW}}</td>
+    <td>{{baseMT}}</td>
+  </tr>
+  <tr>
+    <td>Final Quote Amount (ETH)</td>
+    <td>0.000</td>
+    <td>{{quoteEW}}</td>
+    <td>{{quoteMT}}</td>
+  </tr>
+  <tr>
+    <td>Number of Buys</td>
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>{{nB}}</td>
+  </tr>
+  <tr>
+    <td>Number of Sells</td>
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>{{nS}}</td>
+  </tr>
+</table>
+<p>
+Backtest time: {{btT}} Seconds<br />
+  <br/>
 </p>
 <div class = "graphs">
   <img src="/graphs?start={{initValue}}&length={{lags}}&cutoff={{cutoff}}&tilt={{tilt}}&stratype={{stratype}}">
