@@ -22,3 +22,11 @@ h1 {
   p1 {
     font-size: 16;
   }
+  #footer {
+    position: relative;
+    margin-top: -180px;
+    /* negative value of footer height */
+    height: 180px;
+    clear: both;
+    background-color: red;
+  }
